@@ -1,0 +1,7 @@
+Story:
+As a Gmail account holder,
+I want to be able to be able to send an email with an image attachment
+so the recipient can view the image.
+
+  Scenario: Email user logs in
+    
