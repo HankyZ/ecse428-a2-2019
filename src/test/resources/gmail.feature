@@ -1,10 +1,8 @@
-Story:
-As a Gmail account holder,
-I want to send an email with an image attachment
-so the recipient can view and download the image.
+Feature: Send an email with an image attachment using Gmail
 
-  Normal Flow: Send the email after attaching an image file and writing the recipient and the subject
-    Given I am logged in
+  Scenario: Send the email after attaching an image file and writing the recipient and the subject
+    Given I am on a Gmail page
+    And I am logged in
     And an empty "New Message" window is opened
     When I write the email of the recipient
     And I write the subject
@@ -13,7 +11,7 @@ so the recipient can view and download the image.
     Then the email should be sent
     And I should see it in the sent mailbox
 
-  Alternate Flow: Send the email after attaching an image file and writing the recipient but not the subject
+  Scenario: Send the email after attaching an image file and writing the recipient but not the subject
     Given I am logged in
     And an empty "New Message" window is opened
     When I write the email of the recipient
@@ -24,7 +22,7 @@ so the recipient can view and download the image.
     Then the email should be sent
     And I should see it in the sent mailbox
 
-  Error Flow: Send the email after attaching an image file with size less than 25MB without writing the recipient
+  Scenario: Send the email after attaching an image file with size less than 25MB without writing the recipient
     Given I am logged in
     And an empty "New Message" window is opened
     When I attach an image file
