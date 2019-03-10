@@ -134,14 +134,7 @@ public class Steps {
     // Then
     @Then("I should see a success message")
     public void iShouldSeeASuccessMessage() {
-        // check if the success message is displayed
-        new WebDriverWait(driver, 20).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver d) {
-                return driver.findElement(By.className(emailSentMessageClassName)).getText().equals(successMessage);
-            }
-        });
-        // there is no need to make assertions since we waited until the success message is displayed
-        // if the success message was not displayed then the program will timeout and result in an error
+        confirmEmailSent();
         tearDown();
     }
 
@@ -164,6 +157,10 @@ public class Steps {
     }
 
     // helper methods
+
+    /**
+     * method to confirm system is in appropriate initial state
+     */
     private void setUp() {
         // start chrome browser
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
@@ -205,6 +202,23 @@ public class Steps {
         }
     }
 
+    /**
+     * method to confirm that the email was actually sent
+     */
+    private void confirmEmailSent() {
+        // check if the success message is displayed
+        new WebDriverWait(driver, 20).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return driver.findElement(By.className(emailSentMessageClassName)).getText().equals(successMessage);
+            }
+        });
+        // there is no need to make assertions since we waited until the success message is displayed
+        // if the success message was not displayed then the program will timeout and result in an error
+    }
+
+    /**
+     * method to ensure system is returned to initial state
+     */
     private void tearDown() {
         driver.quit();
     }
