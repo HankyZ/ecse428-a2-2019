@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,7 +20,7 @@ public class Steps {
 
     // Variables
     private WebDriver driver;
-    private final String projectPath = "C:\\Users\\Kristy\\workspace\\ecse428-a2-2019";
+    private final String projectPath = "C:\\Users\\Hank\\Workspace\\ecse428-a2-2019";
     private final String chromeDriverPath = "drivers/chromedriver.exe";
     private final String gmailPath = "https://www.gmail.com/";
     private final String username = "ecse428a2";
@@ -60,7 +61,7 @@ public class Steps {
         driver.findElement(By.id(usernameNextButtonId)).click();
         // wait for the password field to load then enter password
         new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated(By.name(passwordInputName)))
+                .until(ExpectedConditions.elementToBeClickable(By.name(passwordInputName)))
                 .sendKeys(password);
         // click on next
         driver.findElement(By.id(passwordNextButtonId)).click();
@@ -209,7 +210,7 @@ public class Steps {
         // check if the success message is displayed
         new WebDriverWait(driver, 20).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver d) {
-                return driver.findElement(By.className(emailSentMessageClassName)).getText().equals(successMessage);
+                return driver.getPageSource().contains(successMessage);
             }
         });
         // there is no need to make assertions since we waited until the success message is displayed
